@@ -1,53 +1,134 @@
-# Next.js & HeroUI Template
+# Next.js Todo List App
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+A modern, full-stack todo list application built with Next.js 15, HeroUI, and PostgreSQL.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
+## ✨ Features
 
-## Technologies Used
+- 🔐 **Authentication**: GitHub OAuth and credentials login
+- 📝 **Todo Management**: Create, edit, delete, and organize todos
+- 🏷️ **Categories & Priorities**: Organize todos with custom categories and priority levels
+- 📅 **Due Dates**: Set and track due dates for todos
+- 🔍 **Search & Filter**: Advanced filtering and search capabilities
+- 📊 **Statistics**: Track your productivity with detailed stats
+- 🌙 **Dark/Light Theme**: Beautiful UI with theme switching
+- 📱 **Responsive Design**: Works perfectly on all devices
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+## 🚀 Technologies Used
 
-## How to Use
+- [Next.js 15](https://nextjs.org/docs/getting-started) - React framework with App Router
+- [HeroUI v2](https://heroui.com/) - Modern React UI library
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- [PostgreSQL](https://postgresql.org/) - Robust database
+- [NextAuth.js](https://next-auth.js.org/) - Authentication
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
 
-### Use the template with create-next-app
+## 🛠️ Getting Started
 
-To create a new project based on this template using `create-next-app`, run the following command:
+### Prerequisites
 
-```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
+- Node.js 18+ 
+- PostgreSQL database
+- pnpm (recommended) or npm
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd next-todolist-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Fill in your environment variables:
+   ```env
+   DATABASE_URL="your-postgresql-connection-string"
+   NEXTAUTH_SECRET="your-secret-key"
+   NEXTAUTH_URL="http://localhost:3000"
+   GITHUB_CLIENT_ID="your-github-client-id"
+   GITHUB_CLIENT_SECRET="your-github-client-secret"
+   ```
+
+4. **Set up the database**
+   ```bash
+   # Run the SQL schema
+   psql -d your-database -f lib/database/schema.sql
+   ```
+
+5. **Run the development server**
+   ```bash
+   pnpm dev
+   ```
+
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+├── app/                    # Next.js App Router
+│   ├── (page)/           # Route groups
+│   ├── api/              # API routes
+│   ├── lib/              # App logic
+│   ├── todos/            # Todo pages
+│   └── login/            # Auth pages
+├── components/           # Reusable components
+│   ├── ui/               # Base UI components
+│   └── todos/            # Todo-specific components
+├── lib/                  # Utilities and services
+│   ├── api/              # API layer
+│   ├── database/         # Database services
+│   └── utils.ts          # Helper functions
+├── types/                # TypeScript definitions
+└── config/               # Configuration files
 ```
 
-### Install dependencies
+## 🎯 Key Features
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+### Todo Management
+- ✅ Create, edit, and delete todos
+- 🏷️ Organize with categories and priorities
+- 📅 Set due dates and track deadlines
+- 🔍 Advanced search and filtering
+- 📊 Productivity statistics
 
-```bash
-npm install
-```
+### Authentication
+- 🔐 Secure authentication with NextAuth.js
+- 🐙 GitHub OAuth integration
+- 👤 User session management
 
-### Run the development server
+### UI/UX
+- 🎨 Modern design with HeroUI components
+- 🌙 Dark/light theme support
+- 📱 Fully responsive design
+- ⚡ Fast and smooth animations
 
-```bash
-npm run dev
-```
+## 🚀 Deployment
 
-### Setup pnpm (optional)
+### Vercel (Recommended)
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add your environment variables
+4. Deploy!
 
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
+### Other Platforms
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+The app can be deployed to any platform that supports Next.js:
+- Netlify
+- Railway
+- DigitalOcean App Platform
+- AWS Amplify
 
-## License
+## 📝 License
 
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+Licensed under the [MIT License](LICENSE).

@@ -1,4 +1,17 @@
+import { CheckCircleIcon, ClockIcon,StarIcon,PlayCircleIcon}  from '@heroicons/react/24/solid'
+import { ComponentType } from 'react'
+
 export type SiteConfig = typeof siteConfig;
+
+export const iconMap = {
+  'check-circle': CheckCircleIcon,
+  'clock': ClockIcon,
+  'star' : StarIcon,
+  'play-circle':PlayCircleIcon
+
+} as const
+
+export type IconName = keyof typeof iconMap
 
 export const siteConfig = {
   name: "Next.js + HeroUI",
@@ -7,23 +20,24 @@ export const siteConfig = {
     {
       label: "Home",
       href: "/",
+      icon: 'check-circle' as IconName
     },
     {
       label: "Docs",
       href: "/docs",
+      icon: 'clock' as IconName
     },
     {
       label: "Pricing",
       href: "/pricing",
+      icon: 'star' as IconName
     },
     {
       label: "Blog",
       href: "/blog",
+      icon: 'play-circle' as IconName
     },
-    {
-      label: "About",
-      href: "/about",
-    },
+ 
   ],
   navMenuItems: [
     {
@@ -59,11 +73,5 @@ export const siteConfig = {
       href: "/logout",
     },
   ],
-  links: {
-    github: "https://github.com/heroui-inc/heroui",
-    twitter: "https://twitter.com/hero_ui",
-    docs: "https://heroui.com",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
-  },
+
 };
