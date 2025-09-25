@@ -5,6 +5,7 @@ import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
 import { useState } from "react";
+import SignIn from "@/components/sign-in";
 export default function App() {
   const [action, setAction] = useState("");
   function handleSubmit(payload: any) {
@@ -15,6 +16,7 @@ export default function App() {
       <CardHeader className="w-full flex flex-col font-bold text-4xl mt-5">
         <p>Login</p>
       </CardHeader>
+      <SignIn></SignIn>
       <CardBody>
         <Form
           className="w-80 flex flex-col gap-4 p-5"
