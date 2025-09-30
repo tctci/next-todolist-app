@@ -1,6 +1,10 @@
+"use client"
+
+import { Skeleton } from "@heroui/react";
+
 // 加载动画
 const shimmer =
-  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
+  "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent";
 
 export function CardSkeleton() {
   return (
@@ -26,6 +30,17 @@ export function NavbarSkeleton() {
       <CardSkeleton />
       <CardSkeleton />
     </>
+  );
+}
+
+export function ClientPlansListboxSkeleton() {
+  return (
+    <div className="w-full flex flex-col gap-2">
+      <Skeleton className="h-3 w-full rounded-lg" />
+      <Skeleton className="h-3w-full rounded-lg" />
+      <Skeleton className="h-3 w-full rounded-lg" />
+      <Skeleton className="h-3w-full rounded-lg" />
+    </div>
   );
 }
 

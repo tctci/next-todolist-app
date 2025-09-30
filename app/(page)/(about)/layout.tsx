@@ -10,7 +10,7 @@ export default async function Layout({
     <section className="flex w-full h-full">
     <Catalogue />
     <Divider orientation="vertical" className="mx-4"></Divider>
-    <div>{children}</div>
+    <div className="w-full">{children}</div>
     </section>
   );
 }

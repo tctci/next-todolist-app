@@ -29,3 +29,16 @@ export const getUserByEmail = (email:string) => {
   const found = users.find(user => user.email === email);
   return found;
 }
+
+export const getPlans = async() =>{
+  return await sql`
+  SELECT * FROM public.plan
+  `;
+}
+
+export const getTodos = async() =>{
+  return await sql`
+  SELECT * FROM public.todos
+  `;
+}
+

@@ -1,14 +1,21 @@
 export interface Todo {
   id: string;
   title: string;
-  description?: string;
-  completed: boolean;
+  description?: any;
+  completed?: boolean;
   priority: 'low' | 'medium' | 'high';
   category?: string;
   dueDate?: Date;
-  createdAt: Date;
-  updatedAt: Date;
-  userId: string;
+  status: TodoStatus;
+  createdAt?: Date;
+  updatedAt?: Date;
+  userId?: string;
+}
+
+export enum TodoStatus  {
+ DONE='done',
+ UNDONE='undone',
+ DOING='doing'
 }
 
 export interface CreateTodoInput {
