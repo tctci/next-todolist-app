@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import postgres from "postgres";
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
-export async function GET(
-  _request: Request,
-  { params }: { params: { planId: string } }
-) {
+export async function GET(_request: Request, props: { params: Promise<{ planId: string }> }) {
+  const params = await props.params;
   let data: postgres.RowList<postgres.Row[]> | never[] = [];
   const { planId } = params;
   data = await sql`

@@ -1,12 +1,13 @@
 "use client";
 import dynamic from "next/dynamic";
 import { Divider } from "@heroui/divider";
-import { useState } from "react";
+import { useState, use } from "react";
 import { TodoList } from "@/components/todoList";
 import { Todo } from "@/types/todo";
 
-export default  function CataloguePage(props: { params: any; }) {
-  
+export default  function CataloguePage(props: { params: Promise<any>; }) {
+  const params = use(props.params);
+
   const Editor = dynamic(() => import("@/components/editor/Editor"), {
     ssr: false,
   });
@@ -24,7 +25,7 @@ export default  function CataloguePage(props: { params: any; }) {
   return (
     <div className="flex h-full">
       <div className="w-1/2 pr-4.5">
-        <TodoList onItemClick={handleTodoClick} params={props.params}></TodoList>
+        <TodoList onItemClick={handleTodoClick} params={params}></TodoList>
       </div>
       <div className="flex h-full">
         <Divider orientation="vertical"></Divider>

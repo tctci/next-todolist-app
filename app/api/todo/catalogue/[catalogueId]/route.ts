@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import postgres from "postgres";
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
-export async function GET(
-  request: Request,
-  { params }: { params: { catalogueId: string } }
-) {
+export async function GET(request: Request, props: { params: Promise<{ catalogueId: string }> }) {
+  const params = await props.params;
   let data: postgres.RowList<postgres.Row[]> | never[] = [];
   const { catalogueId } = params;
   const date = new Date();
