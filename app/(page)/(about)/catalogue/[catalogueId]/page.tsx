@@ -1,11 +1,11 @@
 "use client";
 import dynamic from "next/dynamic";
 import { Divider } from "@heroui/divider";
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import { TodoList } from "@/components/todoList";
 import { Todo } from "@/types/todo";
-
-export default  function CataloguePage(props: { params: Promise<any>; }) {
+import { useDebouncedCallback } from "use-debounce";
+export default function CataloguePage(props: { params: Promise<any> }) {
   const params = use(props.params);
 
   const Editor = dynamic(() => import("@/components/editor/Editor"), {
@@ -15,13 +15,26 @@ export default  function CataloguePage(props: { params: Promise<any>; }) {
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
   const handleTodoClick = (todo: Todo) => {
-    console.log("点击的 Todo:", todo);
     setSelectedTodo(todo);
-    console.log(data);
-    
-    setData(todo.description);
   };
 
+  useEffect(() => {
+    if(!selectedTodo?.id) return
+    async function setTodoDescription(todoId: string) {
+      const todo = await (await fetch(`/api/todo/${todoId}`)).json();
+      console.log(todo.data);
+      
+      setData(todo.data.description);
+    }
+    setTodoDescription(selectedTodo?.id || '')
+  }, [selectedTodo?.id]);
+
+  const handleEditorChange = useDebouncedCallback((data: any) => {
+    fetch(`/api/todo/${selectedTodo?.id}/description/save`, {
+      method: "post",
+      body: JSON.stringify(data),
+    });
+  }, 1000);
   return (
     <div className="flex h-full">
       <div className="w-1/2 pr-4.5">
@@ -31,9 +44,15 @@ export default  function CataloguePage(props: { params: Promise<any>; }) {
         <Divider orientation="vertical"></Divider>
       </div>
       <div className="w-1/2">
-
-        <Editor value={data} onChange={()=>{}} holder="editorjs-container" />
-
+        {selectedTodo ? (
+          <Editor
+            value={data}
+            onChange={handleEditorChange}
+            holder="editorjs-container"
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

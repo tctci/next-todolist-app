@@ -9,7 +9,7 @@ import { useState, useEffect, ChangeEventHandler } from "react";
 import { Divider } from "@heroui/divider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export const motionProps:any = {
+export const motionProps: any = {
   variants: {
     enter: {
       y: 0,
@@ -66,25 +66,27 @@ export const PlusIcon = () => {
 
 interface TodoListProps {
   onItemClick?: (todo: Todo) => void;
-  params?: any
+  params?: any;
 }
 
-export function TodoList({ onItemClick,params }: TodoListProps) {
-  const searchParams = useSearchParams()
+export function TodoList({ onItemClick, params }: TodoListProps) {
+  const searchParams = useSearchParams();
   const [isFocus, setFocus] = useState(false);
   const [todoLists, setTodoLists] = useState<Todo[]>([]);
-
+  const pathName = usePathname();
   useEffect(() => {
     async function getTodos() {
-      const urlParams = await params
-      console.log(urlParams);
-      
-      const result = await(await fetch(`/api/todo/plan/${urlParams.planId}`)).json()
+      const urlParams = await params;
+      let result = [];
+      if (pathName.includes("catalogue")) {
+        result = await (await fetch(`/api/todo/catalogue/${urlParams.catalogueId}`)).json();
+      }else {
+        result = await (await fetch(`/api/todo/plan/${urlParams.planId}`)).json();
+      }
       setTodoLists(result.data);
-      return 
+      return;
     }
-    getTodos()
- 
+    getTodos();
   }, []);
 
   useEffect(() => {
@@ -128,13 +130,12 @@ export function TodoList({ onItemClick,params }: TodoListProps) {
 
   const statusArr = [TodoStatus.UNDONE, TodoStatus.DONE];
 
-  const pathName = usePathname()
-  const { replace } = useRouter()
-  function handleTodoClick(item:Todo) {
+  const { replace } = useRouter();
+  function handleTodoClick(item: Todo) {
     const params = new URLSearchParams(searchParams);
-    params.set('id', item.id)
+    params.set("id", item.id);
     // replace(`${pathName}?${params.toString()}`)
-    onItemClick?.(item)
+    onItemClick?.(item);
   }
   return (
     <>

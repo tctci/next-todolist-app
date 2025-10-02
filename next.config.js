@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    swcMinify: true,  // 保持开启，SWC比Babel更快
+
     reactStrictMode: false, // 开发时可暂时关闭严格模式
     eslint: {
       ignoreDuringBuilds: true, // 开发时先关闭ESLint检查
