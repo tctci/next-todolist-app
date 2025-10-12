@@ -46,6 +46,8 @@ export default function RootLayout({
           <div className="relative flex flex-col h-screen">
             <main className="w-full h-full mx-auto flex-grow">
               {children}
+              <Analytics />
+              <SpeedInsights />
             </main>
 
           </div>
